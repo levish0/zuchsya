@@ -1,0 +1,19 @@
+[package]
+name = "zuchsya"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Feel the Rhythm"
+
+[[bin]]
+name = "zuchsya"
+path = "src/main.rs"
+
+[dependencies]
+zuchsya-core = { workspace = true }
+bevy = { workspace = true }
+bevy_kira_audio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
