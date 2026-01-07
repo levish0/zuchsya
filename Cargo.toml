@@ -11,6 +11,8 @@ authors = ["Levi Lim <shiueo.csh@gmail.com>"]
 [workspace.dependencies]
 # Internal crates
 zuchsya-core = { path = "crates/zuchsya-core" }
+zuchsya-play = { path = "crates/zuchsya-play" }
+zuchsya-editor = { path = "crates/zuchsya-editor" }
 
 bevy = "0.17"
 bevy_kira_audio = "0.25.0-rc.1"

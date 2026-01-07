@@ -1,0 +1,11 @@
+[package]
+name = "zuchsya-editor"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Beatmap editor for Zuchsya"
+
+[dependencies]
+zuchsya-core = { workspace = true }
+bevy = { workspace = true }

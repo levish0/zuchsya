@@ -1,0 +1,11 @@
+[package]
+name = "zuchsya-play"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Gameplay systems for Zuchsya"
+
+[dependencies]
+zuchsya-core = { workspace = true }
+bevy = { workspace = true }
