@@ -1,4 +1,4 @@
-name: V7-server
+name: zuchsya
 
 on:
   push:

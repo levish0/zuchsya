@@ -4,7 +4,6 @@ use bevy::prelude::*;
 
 pub mod screens;
 
-use crate::app::state::GameState;
 use screens::{loading, main_menu};
 
 /// UI plugin

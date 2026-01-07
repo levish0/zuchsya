@@ -1,7 +1,6 @@
 //! Loading screen
 
 use bevy::prelude::*;
-use bevy::hierarchy::DespawnRecursiveExt;
 use crate::app::state::GameState;
 
 pub struct LoadingPlugin;

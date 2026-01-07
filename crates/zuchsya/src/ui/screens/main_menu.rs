@@ -74,7 +74,7 @@ fn setup_main_menu(mut commands: Commands) {
         });
 }
 
-fn spawn_button(parent: &mut ChildBuilder, text: &str, button_type: MenuButton) {
+fn spawn_button(parent: &mut ChildSpawnerCommands, text: &str, button_type: MenuButton) {
     parent
         .spawn((
             Button,
@@ -107,18 +107,18 @@ fn button_system(
         (Changed<Interaction>, With<Button>),
     >,
     mut next_state: ResMut<NextState<GameState>>,
-    mut exit: EventWriter<AppExit>,
+    mut exit: MessageWriter<AppExit>,
 ) {
     for (interaction, mut color, button) in &mut interaction_query {
         match *interaction {
             Interaction::Pressed => {
                 *color = PRESSED_BUTTON.into();
                 match button {
-                    MenuButton::Play => next_state.set(GameState::SongSelect),
+                MenuButton::Play => next_state.set(GameState::SongSelect),
                     MenuButton::Edit => next_state.set(GameState::Editor),
                     MenuButton::Settings => next_state.set(GameState::Settings),
                     MenuButton::Exit => {
-                        exit.send(AppExit::Success);
+                        exit.write(AppExit::Success);
                     }
                 }
             }
@@ -134,6 +134,6 @@ fn button_system(
 
 fn cleanup_main_menu(mut commands: Commands, query: Query<Entity, With<MainMenuScreen>>) {
     for entity in query.iter() {
-        commands.entity(entity).despawn_recursive();
+        commands.entity(entity).despawn();
     }
 }
