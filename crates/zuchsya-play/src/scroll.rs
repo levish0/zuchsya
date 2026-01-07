@@ -8,9 +8,10 @@ pub struct ScrollPlugin;
 impl Plugin for ScrollPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(ScrollConfig::default())
+            .add_systems(OnEnter(GameState::Playing), reset_game_time)
             .add_systems(
                 Update,
-                update_scroll.run_if(in_state(GameState::Playing)),
+                (update_scroll, adjust_scroll_speed).run_if(in_state(GameState::Playing)),
             );
     }
 }
@@ -26,7 +27,7 @@ pub struct ScrollConfig {
 
 impl Default for ScrollConfig {
     fn default() -> Self {
-        Self::from_speed(20)
+        Self::from_speed(20) // osu default is 8, but we use 20 for better readability
     }
 }
 
@@ -69,10 +70,31 @@ pub struct GameTime {
     pub current_ms: f64,
 }
 
-fn update_scroll(
-    time: Res<Time>,
-    mut game_time: ResMut<GameTime>,
-) {
+fn update_scroll(time: Res<Time>, mut game_time: ResMut<GameTime>) {
     // Update game time
     game_time.current_ms += time.delta_secs_f64() * 1000.0;
+}
+
+/// System to reset game time when entering Playing state
+pub fn reset_game_time(mut game_time: ResMut<GameTime>) {
+    game_time.current_ms = 0.0;
+}
+
+/// Adjust scroll speed with F3/F4 keys
+fn adjust_scroll_speed(keyboard: Res<ButtonInput<KeyCode>>, mut config: ResMut<ScrollConfig>) {
+    let mut new_speed = config.speed as i32;
+
+    if keyboard.just_pressed(KeyCode::F4) {
+        new_speed += 2; // Faster
+    }
+    if keyboard.just_pressed(KeyCode::F3) {
+        new_speed -= 2; // Slower
+    }
+
+    new_speed = new_speed.clamp(1, 40);
+
+    if new_speed != config.speed as i32 {
+        *config = ScrollConfig::from_speed(new_speed as u8);
+        info!("Scroll speed: {} (time range: {:.0}ms)", config.speed, config.time_range_ms);
+    }
 }

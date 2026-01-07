@@ -1,26 +1,24 @@
-//! Timing point types
+//! Timing point types for .zuchsya format
 
 use serde::{Deserialize, Serialize};
 
-/// Timing point for BPM and scroll speed
+/// Timing point (BPM change)
+///
+/// Defines the BPM at a specific time. SV (scroll velocity) changes
+/// are handled separately in ScrollVelocity.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TimingPoint {
     /// Time in milliseconds
     pub time: f64,
     /// BPM (beats per minute)
     pub bpm: f64,
-    /// Time signature numerator (e.g., 4 for 4/4)
-    pub time_signature: u8,
-    /// Scroll speed multiplier (1.0 = normal)
-    #[serde(default = "default_scroll_speed")]
-    pub scroll_speed: f64,
-    /// Kiai mode enabled
-    #[serde(default)]
-    pub kiai: bool,
+    /// Time signature (beats per measure, e.g., 4 for 4/4)
+    #[serde(default = "default_signature")]
+    pub signature: u8,
 }
 
-fn default_scroll_speed() -> f64 {
-    1.0
+fn default_signature() -> u8 {
+    4
 }
 
 impl TimingPoint {
@@ -29,9 +27,16 @@ impl TimingPoint {
         Self {
             time,
             bpm,
-            time_signature: 4,
-            scroll_speed: 1.0,
-            kiai: false,
+            signature: 4,
+        }
+    }
+
+    /// Create with custom time signature
+    pub fn with_signature(time: f64, bpm: f64, signature: u8) -> Self {
+        Self {
+            time,
+            bpm,
+            signature,
         }
     }
 
@@ -54,9 +59,7 @@ impl Default for TimingPoint {
         Self {
             time: 0.0,
             bpm: 120.0,
-            time_signature: 4,
-            scroll_speed: 1.0,
-            kiai: false,
+            signature: 4,
         }
     }
 }

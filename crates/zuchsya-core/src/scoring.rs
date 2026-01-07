@@ -3,18 +3,19 @@
 use serde::{Deserialize, Serialize};
 
 /// Hit result (judgement)
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+/// Ordered from worst to best: Miss < Meh < Ok < Good < Great < Perfect
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord, Serialize, Deserialize)]
 pub enum HitResult {
-    Perfect,
-    Great,
-    Good,
-    Ok,
-    Meh,
     Miss,
+    Meh,
+    Ok,
+    Good,
+    Great,
+    Perfect,
 }
 
 impl HitResult {
-    /// Get base score value
+    /// Get base score value (for display/legacy)
     pub fn base_score(&self) -> i32 {
         match self {
             Self::Perfect => 305,
@@ -30,10 +31,22 @@ impl HitResult {
     pub fn accuracy_weight(&self) -> f64 {
         match self {
             Self::Perfect => 1.0,
-            Self::Great => 0.98,
-            Self::Good => 0.95,
-            Self::Ok => 0.85,
-            Self::Meh => 0.5,
+            Self::Great => 1.0,  // Great = same accuracy as Perfect in mania
+            Self::Good => 2.0 / 3.0,
+            Self::Ok => 1.0 / 3.0,
+            Self::Meh => 1.0 / 6.0,
+            Self::Miss => 0.0,
+        }
+    }
+
+    /// Get combo score weight (0.0 - 1.0) for osu!mania scoring
+    pub fn combo_score_weight(&self) -> f64 {
+        match self {
+            Self::Perfect => 1.0,
+            Self::Great => 1.0,
+            Self::Good => 2.0 / 3.0,
+            Self::Ok => 1.0 / 3.0,
+            Self::Meh => 1.0 / 6.0,
             Self::Miss => 0.0,
         }
     }

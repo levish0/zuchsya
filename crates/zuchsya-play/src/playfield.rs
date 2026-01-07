@@ -82,17 +82,10 @@ pub struct ColumnBackground {
     pub column: u8,
 }
 
-fn setup_playfield(
-    mut commands: Commands,
-    config: Res<PlayfieldConfig>,
-) {
+fn setup_playfield(mut commands: Commands, config: Res<PlayfieldConfig>) {
     // Spawn playfield container
     commands
-        .spawn((
-            Playfield,
-            Transform::default(),
-            Visibility::default(),
-        ))
+        .spawn((Playfield, Transform::default(), Visibility::default()))
         .with_children(|parent| {
             // Spawn columns
             for i in 0..config.key_count {
@@ -151,10 +144,7 @@ fn setup_playfield(
         });
 }
 
-fn cleanup_playfield(
-    mut commands: Commands,
-    query: Query<Entity, With<Playfield>>,
-) {
+fn cleanup_playfield(mut commands: Commands, query: Query<Entity, With<Playfield>>) {
     for entity in query.iter() {
         commands.entity(entity).despawn();
     }

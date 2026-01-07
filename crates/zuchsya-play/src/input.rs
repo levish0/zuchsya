@@ -11,8 +11,17 @@ impl Plugin for InputPlugin {
             .insert_resource(KeyState::default())
             .add_systems(
                 Update,
-                update_key_state.run_if(in_state(GameState::Playing)),
+                (update_key_state, handle_escape).run_if(in_state(GameState::Playing)),
             );
+    }
+}
+
+fn handle_escape(
+    keyboard: Res<ButtonInput<KeyCode>>,
+    mut next_state: ResMut<NextState<GameState>>,
+) {
+    if keyboard.just_pressed(KeyCode::Escape) {
+        next_state.set(GameState::SongSelect);
     }
 }
 

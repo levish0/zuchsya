@@ -114,7 +114,7 @@ fn button_system(
             Interaction::Pressed => {
                 *color = PRESSED_BUTTON.into();
                 match button {
-                MenuButton::Play => next_state.set(GameState::SongSelect),
+                    MenuButton::Play => next_state.set(GameState::SongSelect),
                     MenuButton::Edit => next_state.set(GameState::Editor),
                     MenuButton::Settings => next_state.set(GameState::Settings),
                     MenuButton::Exit => {

@@ -4,7 +4,7 @@ use bevy::prelude::*;
 
 pub mod screens;
 
-use screens::{loading, main_menu};
+use screens::{loading, main_menu, song_select};
 
 /// UI plugin
 pub struct UiPlugin;
@@ -14,6 +14,7 @@ impl Plugin for UiPlugin {
         app.add_plugins((
             loading::LoadingPlugin,
             main_menu::MainMenuPlugin,
+            song_select::SongSelectPlugin,
         ));
     }
 }

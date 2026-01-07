@@ -1,0 +1,143 @@
+# Sample Zuchsya Beatmap - Hold Note Test
+version: 1
+
+metadata:
+  title: "Hold Note Test"
+  artist: "Zuchsya"
+  creator: "Zuchsya"
+  difficulty_name: "Hard"
+
+audio:
+  file: "audio.mp3"
+  preview_time: -1
+
+difficulty:
+  keys: 4
+  od: 7.0
+  hp: 5.0
+
+timing:
+  - time: 0
+    bpm: 180.0
+    signature: 4
+
+hit_objects:
+  # Warmup - fast stairs
+  - time: 500
+    lane: 0
+  - time: 666
+    lane: 1
+  - time: 833
+    lane: 2
+  - time: 1000
+    lane: 3
+
+  # Long hold notes (1 second each)
+  - time: 1500
+    lane: 0
+    duration: 1000
+
+  - time: 1500
+    lane: 3
+    duration: 1000
+
+  # Tap while holding
+  - time: 2000
+    lane: 1
+  - time: 2200
+    lane: 2
+
+  # More long holds (1.5 seconds)
+  - time: 3000
+    lane: 1
+    duration: 1500
+
+  - time: 3000
+    lane: 2
+    duration: 1500
+
+  # Fast taps during hold
+  - time: 3333
+    lane: 0
+  - time: 3500
+    lane: 3
+  - time: 3666
+    lane: 0
+  - time: 3833
+    lane: 3
+  - time: 4000
+    lane: 0
+  - time: 4166
+    lane: 3
+
+  # Very long hold (2 seconds)
+  - time: 5000
+    lane: 0
+    duration: 2000
+
+  - time: 5000
+    lane: 3
+    duration: 2000
+
+  # Taps in middle lanes while holding outer
+  - time: 5333
+    lane: 1
+  - time: 5500
+    lane: 2
+  - time: 5666
+    lane: 1
+  - time: 5833
+    lane: 2
+  - time: 6000
+    lane: 1
+  - time: 6166
+    lane: 2
+  - time: 6333
+    lane: 1
+  - time: 6500
+    lane: 2
+  - time: 6666
+    lane: 1
+
+  # Staggered holds
+  - time: 7500
+    lane: 0
+    duration: 1500
+
+  - time: 7750
+    lane: 1
+    duration: 1500
+
+  - time: 8000
+    lane: 2
+    duration: 1500
+
+  - time: 8250
+    lane: 3
+    duration: 1500
+
+  # Fast ending
+  - time: 10000
+    lane: 0
+  - time: 10111
+    lane: 1
+  - time: 10222
+    lane: 2
+  - time: 10333
+    lane: 3
+  - time: 10444
+    lane: 0
+  - time: 10555
+    lane: 1
+  - time: 10666
+    lane: 2
+  - time: 10777
+    lane: 3
+  - time: 10888
+    lane: 0
+  - time: 10888
+    lane: 1
+  - time: 10888
+    lane: 2
+  - time: 10888
+    lane: 3

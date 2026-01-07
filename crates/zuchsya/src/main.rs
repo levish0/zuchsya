@@ -3,8 +3,8 @@
 use bevy::prelude::*;
 use bevy::window::WindowResolution;
 use zuchsya_core::GameState;
-use zuchsya_play::PlayPlugin;
 use zuchsya_editor::EditorPlugin;
+use zuchsya_play::PlayPlugin;
 
 mod ui;
 
@@ -20,11 +20,7 @@ fn main() {
         }))
         .init_state::<GameState>()
         .add_systems(Startup, setup)
-        .add_plugins((
-            ui::UiPlugin,
-            PlayPlugin,
-            EditorPlugin,
-        ))
+        .add_plugins((ui::UiPlugin, PlayPlugin, EditorPlugin))
         .run();
 }
 

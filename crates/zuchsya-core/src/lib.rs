@@ -7,14 +7,16 @@
 //! - Timing points
 //! - Scoring/Judgement types
 
-pub mod state;
 pub mod beatmap;
 pub mod hit_object;
-pub mod timing;
 pub mod scoring;
+pub mod scroll_velocity;
+pub mod state;
+pub mod timing;
 
-pub use state::*;
 pub use beatmap::*;
 pub use hit_object::*;
-pub use timing::*;
 pub use scoring::*;
+pub use scroll_velocity::*;
+pub use state::*;
+pub use timing::*;
