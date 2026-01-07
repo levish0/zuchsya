@@ -1,7 +1,7 @@
 //! Playfield rendering - Columns and hit target
 
 use bevy::prelude::*;
-use crate::app::state::GameState;
+use zuchsya_core::GameState;
 
 /// Playfield constants (based on osu!mania)
 pub const COLUMN_WIDTH: f32 = 80.0;

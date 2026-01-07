@@ -12,6 +12,8 @@ path = "src/main.rs"
 
 [dependencies]
 zuchsya-core = { workspace = true }
+zuchsya-play = { workspace = true }
+zuchsya-editor = { workspace = true }
 bevy = { workspace = true }
 bevy_kira_audio = { workspace = true }
 serde = { workspace = true }

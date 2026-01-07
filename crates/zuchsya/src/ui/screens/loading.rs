@@ -1,7 +1,7 @@
 //! Loading screen
 
 use bevy::prelude::*;
-use crate::app::state::GameState;
+use zuchsya_core::GameState;
 
 pub struct LoadingPlugin;
 
